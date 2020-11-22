@@ -1,0 +1,17 @@
+name: CI
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+            version: v1.29
+
+      - name: Build docker container
+        run: make build-amd64
